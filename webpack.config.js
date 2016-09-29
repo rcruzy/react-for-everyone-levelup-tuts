@@ -1,9 +1,8 @@
 module.exports = {
     // point to actual development code
-    entry: [
+    entry:
         // path to App.js
-        './src/App.js' // this will be changed to lowercase app.js
-    ],
+        './src/App.js', // this will be changed to lowercase app.js
     // output into home directory
     output: {
         // home directory
@@ -15,7 +14,11 @@ module.exports = {
     module: {
         loader: [{
             test: /\.jsx?$/, // pattern to look for jsx file
-            loader: 'babel' // will handle any jsx file that we need
+            exclude: /node_modules/,
+            loader: 'babel', // will handle any jsx file that we need
+            query: {
+                presets: ['es2015', 'react']
+            }
         }]
     }
 };
