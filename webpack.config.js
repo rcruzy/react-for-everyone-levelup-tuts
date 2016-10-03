@@ -12,7 +12,7 @@ module.exports = {
     },
     // will look for loader
     module: {
-        loader: [{
+        loaders: [{
             test: /\.jsx?$/, // pattern to look for jsx file
             exclude: /node_modules/,
             loader: 'babel', // will handle any jsx file that we need
