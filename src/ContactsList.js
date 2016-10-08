@@ -7,7 +7,8 @@ class ContactsList extends React.Component {
     render() {
         return (
             <ul>
-                <li>Ryan 555 555 555</li>
+            	{/* use data passed to child component*/}
+                <li>{this.props.contacts.name} {this.props.contacts.phone}</li>
             </ul>
         )
     }
