@@ -1,17 +1,13 @@
 // import from dependencies
 import React from 'react';
-import ReactDom from 'react-dom';
 
-// chld component component
-class Contact extends React.Component {
-    render() {
-        return (
-            <li>
-            	{/* use passed data here*/}
-                {this.props.contact.name} {this.props.contact.phone}
-            </li>
-        )
-    }
-}
+// child component 
+// const to make it dumb/stateless component
+// pass the contact object here or more than 1 props
+const Contact = ({contact, item}) =>
+	<li>
+		{/* use passed data here*/}
+	    {contact.name} {contact.phone} {item}
+	</li>
 
 export default Contact;

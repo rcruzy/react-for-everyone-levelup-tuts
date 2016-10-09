@@ -92,7 +92,8 @@ class ContactsList extends React.Component {
 	            	{filteredContacts.map((contact)=> {
 	            		// need to reference object's id to 
 	            		// prevent warning
-	            		return <Contact contact={contact} key={contact.id}/>
+	            		// multiple props possible
+	            		return <Contact contact={contact} item="hello" key={contact.id}/>
 	            	})}
 	            </ul>
         	</div>
