@@ -7,18 +7,45 @@ import Contact from './Contact';
 
 // chld component component
 class ContactsList extends React.Component {
+
+	constructor() {
+		super();
+		this.state = {
+			search: 'Level Up'
+		};
+	}
+
+	updateSearch(event) {
+		// console.log(event.target.value);
+		// whatever is being typed in the input box is
+		// getting set to state
+		// limit to 20 chars - substr(0, 20)
+		this.setState({search: event.target.value.substr(0, 20)});
+	}
+ 
     render() {
         return (
-            <ul>
-            	{/* loop inside array with map function 
-					return component inside annon function
-            	*/}
-            	{this.props.contacts.map((contact)=> {
-            		// need to reference object's id to 
-            		// prevent warning
-            		return <Contact contact={contact} key={contact.id}/>
-            	})}
-            </ul>
+        	<div>
+	            <ul>
+	            	{/* loop inside array with map function 
+						return component inside annon function
+	            	*/}
+
+	            	{this.props.contacts.map((contact)=> {
+	            		// need to reference object's id to 
+	            		// prevent warning
+	            		return <Contact contact={contact} key={contact.id}/>
+	            	})}
+	            </ul>
+
+            	{/* state from the constructor above
+					onChange to update
+					bind updateSearch to 'this'
+            	 */}
+	           	<input type="text" 
+	           			value={this.state.search}
+	           		onChange={this.updateSearch.bind(this)}/>
+        	</div>
         )
     }
 }
