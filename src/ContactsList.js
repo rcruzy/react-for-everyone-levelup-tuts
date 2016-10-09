@@ -8,10 +8,12 @@ import Contact from './Contact';
 // chld component component
 class ContactsList extends React.Component {
 
-	constructor() {
-		super();
+	// pass props to state
+	constructor(props) {
+		super(props);
 		this.state = {
-			search: ''
+			search: '',
+			contacts: props.contacts
 		};
 	}
 
@@ -22,9 +24,38 @@ class ContactsList extends React.Component {
 		// limit to 20 chars - substr(0, 20)
 		this.setState({search: event.target.value.substr(0, 20)});
 	}
+
+	addContact(event) {
+		// prevent from reloading the whole page
+		event.preventDefault();
+
+		// set this values to variables
+		let name = this.refs.name.value;
+		let phone = this.refs.phone.value;
+
+		// randomize id
+		let id = Math.floor((Math.random() * 100) + 1);
+
+
+		console.log();
+
+		// grab the variables and push it in the contacts
+		// array ala ES6 style's shorthand for setting objects
+		// i.e id: id, name: name, etc..
+		this.setState({
+			contacts: this.state.contacts.concat({
+				id, name, phone
+			})
+		});
+
+		// set to empty to removed added contacts
+		// to input fields
+		this.refs.name.value = '';
+		this.refs.phone.value = '';
+	}
  
     render() {
-    	let filteredContacts = this.props.contacts.filter(
+    	let filteredContacts = this.state.contacts.filter(
     		// filter contacts if it matches input field
     		// chain toLower
     		(contact) => {
@@ -34,6 +65,25 @@ class ContactsList extends React.Component {
 
         return (
         	<div>
+            	{/* state from the constructor above
+					onChange to update
+					bind updateSearch to 'this'
+            	 */}
+	           	<input type="text" 
+           			value={this.state.search}
+           			placeholder="Search"
+	           		onChange={this.updateSearch.bind(this)}/>
+
+	           	{/* bind to this context (addContact function) 
+					Use refs to access input - insert to
+					object array
+	           	*/}	
+	           	<form onSubmit={this.addContact.bind(this)}>
+	           		<input type="text" ref="name" />
+	           		<input type="text" ref="phone" />
+	           		<button type="submit">Add New Contact</button>
+	           	</form>
+
 	            <ul>
 	            	{/* loop inside array with map function 
 						return component inside annon function
@@ -45,14 +95,6 @@ class ContactsList extends React.Component {
 	            		return <Contact contact={contact} key={contact.id}/>
 	            	})}
 	            </ul>
-
-            	{/* state from the constructor above
-					onChange to update
-					bind updateSearch to 'this'
-            	 */}
-	           	<input type="text" 
-	           			value={this.state.search}
-	           		onChange={this.updateSearch.bind(this)}/>
         	</div>
         )
     }
