@@ -6,10 +6,23 @@ import ReactDom from 'react-dom';
 import ContactsList from './ContactsList';
 
 
-let contacts = {
+let contacts = [{
+    id: 1,
     name: 'Ryan',
     phone: '555 3355 5555'
-};
+}, {
+    id: 2,
+    name: 'Courtney',
+    phone: '555 1111 5555'
+}, {
+    id: 3,
+    name: 'Tim',
+    phone: '555 2222 5555'
+}, {
+    id: 4,
+    name: 'Jeff',
+    phone: '555 5521 5555'
+}];
 
 // base component
 class App extends React.Component {
