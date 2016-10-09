@@ -11,7 +11,7 @@ class ContactsList extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			search: 'Level Up'
+			search: ''
 		};
 	}
 
@@ -24,6 +24,14 @@ class ContactsList extends React.Component {
 	}
  
     render() {
+    	let filteredContacts = this.props.contacts.filter(
+    		// filter contacts if it matches input field
+    		// chain toLower
+    		(contact) => {
+    			return contact.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
+    		}
+		);
+
         return (
         	<div>
 	            <ul>
@@ -31,7 +39,7 @@ class ContactsList extends React.Component {
 						return component inside annon function
 	            	*/}
 
-	            	{this.props.contacts.map((contact)=> {
+	            	{filteredContacts.map((contact)=> {
 	            		// need to reference object's id to 
 	            		// prevent warning
 	            		return <Contact contact={contact} key={contact.id}/>
