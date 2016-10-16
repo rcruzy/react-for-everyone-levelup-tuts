@@ -6,8 +6,7 @@ module.exports = {
     // output into home directory
     output: {
         // home directory
-        path: __dirname,
-        // from the App.js above
+        path: 'path.resolve(__dirname/build, "build")',
         filename: 'app.js'
     },
     // will look for loader
